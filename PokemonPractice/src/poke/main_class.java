@@ -21,45 +21,53 @@ public class main_class {
         // 3. Queueを作成
         SimpleQueue sq = new SimpleQueue(5);
 
+
         // 4. 素早さを比較して、攻撃順を決める
-        if (P1.get_speed() > P2.get_speed()) {
+        BattleAction a1 =
+            new BattleAction(P1, P2, P1.moves[0]);
 
-            BattleAction a1 =
-                new BattleAction(P1, P2, P1.moves[0]);
+        BattleAction a2 =
+            new BattleAction(P2, P1, P2.moves[0]);
 
-            BattleAction a2 =
-                new BattleAction(P2, P1, P2.moves[0]);
-
+        if (P1.get_speed() >= P2.get_speed()) {
             sq.enqueue(a1);
             sq.enqueue(a2);
-
         } else {
-
-            BattleAction a2 =
-                new BattleAction(P1, P2, P1.moves[0]);
-
-            BattleAction a1 =
-                new BattleAction(P2, P1, P2.moves[0]);
-
-            sq.enqueue(a1);
             sq.enqueue(a2);
+            sq.enqueue(a1);
         }
-        for (int i = sq.front; i < sq.rear; i++) {
-        	BattleAction run = sq.dequeue();
-        	int k = run.perform();
-        	run.defender.set_hp(0-k);
 
-        	System.out.println(run.attacker.show_name() + " の攻撃！");
-        	System.out.println(run.defender.show_name() + " の残りHP：" + run.defender.show_hp());
-        	System.out.println();
-}
+        // 5. peek()で先頭の攻撃を確認する
+        BattleAction next = sq.peek();
 
-        // 5. Queueから順番に取り出す
+        if (next != null) {
+            System.out.println(
+                "次の攻撃：" + next.attacker.show_name()
+            );
+        }
+
+        // 6. Queueから順番に取り出して攻撃する
         while (!sq.isEmpty()) {
             BattleAction action = sq.dequeue();
 
-            // 取り出したactionを使って攻撃処理を行う
+            int damage = action.perform();
+            action.defender.set_hp(
+                action.defender.show_hp() - damage
+            );
+
+            System.out.println(
+                action.attacker.show_name() + " の攻撃！"
+            );
+
+            System.out.println(
+                action.defender.show_name()
+                + " の残りHP："
+                + action.defender.show_hp()
+            );
+
+            System.out.println();
         }
+
 
         // 技を作る
         Move waterGun = new Move(

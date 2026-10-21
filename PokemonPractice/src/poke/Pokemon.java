@@ -109,4 +109,6 @@ public class Pokemon {
         System.out.println("PP:" + this.moves[i].show_pp());
         System.out.println("目前PP:" + this.moves[i].show_curr_pp());
     }
+    
+    
 }
