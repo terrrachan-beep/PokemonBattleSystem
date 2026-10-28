@@ -56,4 +56,9 @@ public class Entry {
 	double c_table(int att, int def) {
 		return typechart[att][def];
 	}
+
+	public int damage(Move get_move, Object get_type) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
