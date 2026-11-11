@@ -18,8 +18,11 @@ public class BattleAction {
     }
 
     int perform() {
-        int damage = move.show_power();
-        return damage;
+    	Entry e1=new Entry();
+    	System.out.print(this.attacker.show_name());
+    	int k=e1.damage(this.attacker.get_move(0),
+    			this.defender.get_type());
+    	System.out.println(""+k+"點傷害");
+    	return k;
     }
-    
 }

@@ -1,7 +1,7 @@
 package poke;
 
 public class CircularBattleQueue {
-    BattleAction[] data;
+    BA[] data;
     int front;
     int rear;
     int count;
@@ -11,7 +11,7 @@ public class CircularBattleQueue {
             throw new IllegalArgumentException();
         }
 
-        data = new BattleAction[capacity];
+        	data = new BA[size];
         front = 0;
         rear = 0;
         count = 0;
@@ -26,40 +26,33 @@ public class CircularBattleQueue {
     }
     
 
-    void enqueue(BattleAction action) {
+    void enqueue(BA action) {
         if (isFull()) {
             System.out.println("Queue is full!");
             return;
         }
 
-        data[rear] = action;
+        data[rear] = value;
         rear = (rear + 1) % data.length;
         count++;
     }
 
-    BattleAction dequeue() {
-        if (isEmpty()) {
-            return null;
-        }
+    BA peek() {
+	    if (isEmpty()) {
+	        return null;
+	    }
+	    return data[front];
+	}
 
-        BattleAction action = data[front];
-        data[front] = null;
-        front = (front + 1) % data.length;
-        count--;
+	
+	BA dequeue() {
+	    if (isEmpty()) {
+	        return null;
+	    }
 
-        return action;
-    }
-
-    BattleAction peek() {
-        if (isEmpty()) {
-            return null;
-        }
-
-        return data[front];
-    }
-    
-    int size() {
-        return count;
-    }
-    
+	    BA value = data[front];
+	    front=(front+1)%data.length;
+	    count--;
+	    return value;
+	}
 }

@@ -51,6 +51,7 @@ public class Move {
     int show_power() {
         return this.power;
     }
+    
 
     int show_accuracy() {
         return this.accuracy;

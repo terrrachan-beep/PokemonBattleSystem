@@ -9,7 +9,7 @@ public class Pokemon {
     private int hp;
     private int number;
     private int speed;
-    Move moves[] = new Move[4];
+    Move moves[] = new Move[1];
     int count = 4;
 
     // function
@@ -18,6 +18,7 @@ public class Pokemon {
         this.name = name;
         this.type = type;
         this.hp = hp;
+        
         Scanner sc = new Scanner(System.in);
         if (this.check_valid_hp() == false) {
             System.out.println("Wrong hp value");

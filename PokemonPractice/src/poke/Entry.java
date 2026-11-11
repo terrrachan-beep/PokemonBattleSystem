@@ -53,12 +53,42 @@ public class Entry {
 		return k;
 	}
 
-	double c_table(int att, int def) {
-		return typechart[att][def];
+	void set_move() {
+		this.allmove[0]=new move(1, "拍擊","一般",0,40,100,35);
+		this.allmove[1]=new move(55, "水槍","水",2,40,100,25);
+		this.allmove[2]=new move(51, "火花","火",2,40,40,25);
+		this.allmove[3]=new move(9, "雷電拳","電",1,75,100,15);
+		this.allmove[4]=new move(22, "藤鞭","草",2,45,100,25);
 	}
-
-	public int damage(Move get_move, Object get_type) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	int damage(move m1, String type) {
+		int type1=this.checktype(m1.show_type());
+		int type2=this.checktype(type);
+		double rate=this.c_table(type1, type2);
+		double hit=Math.random();
+		if (hit>(m1.show_accuracy()/100.0)) {
+			System.out.println("發出的攻擊沒有命中...");
+			System.out.print("造成了");
+			return 0;
+		}else {
+			if (rate>1) {
+				System.out.print("發出了"+m1.show_name()+"...結果非常有效");
+			}else if(rate<1) {
+				System.out.print("發出了"+m1.show_name()+"...結果不怎麼有效");
+			}else {
+				System.out.print("發出了"+m1.show_name()+"...");
+			}
+			System.out.println();
+			System.out.print("造成了");
+			return (int)(Math.round(m1.show_power()*rate));
+		}
+	}
+	
+	public static double c_table2(int att,int def) {
+		return typechart1[att][def];
+	}
+	
+	double c_table(int att,int def) {
+		return typechart[att][def];
 	}
 }
