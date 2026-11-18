@@ -1,4 +1,3 @@
-
 package poke;
 import java.util.*;
 
@@ -55,7 +54,7 @@ public class main_class {
 		do {
 			boolean c1=false,c2=false;
 			while ((currP1.show_hp()>0)&(currP2.show_hp()>0)) {
-				
+				Stack<BattleState>history = new Stack<>();
 				try {
 					CircularBattleQueue sq=new CircularBattleQueue(5);
 					if (c1==true) {
@@ -83,13 +82,42 @@ public class main_class {
 							sq.enqueue(a2);
 						}
 					}
+					
+					history.push(new BattleState(
+							currP1.show_hp(),
+							currP2.show_hp()
+					));
+					
 					for (int i=sq.front;i<sq.rear;i++) {
 						BA run=sq.dequeue();
+						
 						run.execute();
 						if (run.check_hp()==true) {
 							break;
 						}
 					}
+					// 回溯
+					if (testflag == false) {
+					    testflag = true;
+
+					    System.out.println("回溯發生 !!!"
+					            + currP1.show_hp()
+					            + currP2.show_hp());
+
+					    BattleState recall = history.pop();
+
+					    int ahp = recall.攻擊者hp;
+					    int dhp = recall.防禦者hp;
+
+					    currP1.set_hp(dhp);
+					    currP2.set_hp(ahp);
+
+					    System.out.println(""
+					            + currP1.show_hp()
+					            + currP2.show_hp());
+					}
+
+					
 					if (currP1.show_hp()==0) {
 						currP1=nextP1;
 						nextP1=m1.selectNextPokemon(team1, nextP1);

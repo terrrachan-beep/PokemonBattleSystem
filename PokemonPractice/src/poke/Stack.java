@@ -2,7 +2,6 @@ package poke;
 
 import java.util.ArrayList;
 
-import 
 
 public class Stack {
 	int position;

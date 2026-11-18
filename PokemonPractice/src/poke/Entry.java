@@ -54,14 +54,14 @@ public class Entry {
 	}
 
 	void set_move() {
-		this.allmove[0]=new move(1, "拍擊","一般",0,40,100,35);
-		this.allmove[1]=new move(55, "水槍","水",2,40,100,25);
-		this.allmove[2]=new move(51, "火花","火",2,40,40,25);
-		this.allmove[3]=new move(9, "雷電拳","電",1,75,100,15);
-		this.allmove[4]=new move(22, "藤鞭","草",2,45,100,25);
+		this.allmove[0]=new Move(1, "拍擊","一般",0,40,100,35);
+		this.allmove[1]=new Move(55, "水槍","水",2,40,100,25);
+		this.allmove[2]=new Move(51, "火花","火",2,40,40,25);
+		this.allmove[3]=new Move(9, "雷電拳","電",1,75,100,15);
+		this.allmove[4]=new Move(22, "藤鞭","草",2,45,100,25);
 	}
 	
-	int damage(move m1, String type) {
+	int damage(Move m1, String type) {
 		int type1=this.checktype(m1.show_type());
 		int type2=this.checktype(type);
 		double rate=this.c_table(type1, type2);
